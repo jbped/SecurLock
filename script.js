@@ -26,7 +26,6 @@ var generatePassword = function () {
     }
     else {
       passwordLength = parseInt(passwordLength);
-      console.log('passwordLength',passwordLength);
       break;
     }
   }
@@ -34,6 +33,7 @@ var generatePassword = function () {
   // Create empty choice array
   let choiceArray = [];
   console.log('choiceArray', choiceArray);
+  console.log('passwordLength',passwordLength);
   
   while (true) {
     // Lowercase Confirmation if true merges blank choiceArray with lowercaseArray
@@ -70,13 +70,13 @@ var generatePassword = function () {
     }
   }
 
+  var randomGen = '';
+  
   for(var i = 0; i < passwordLength; i++) {
-    password += choiceArray[Math.floor(Math.random() * choiceArray.length)];
-    console.log(choiceArray);
-    return password;
+    randomGen += choiceArray[Math.floor(Math.random() * choiceArray.length)];
+    console.log(randomGen);
   }
-
-
+  return randomGen;
 }
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
