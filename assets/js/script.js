@@ -22,7 +22,7 @@ var generatePassword = function () {
     var passwordLength = window.prompt('How long of a password would you like generated? Please keep this within a minimum of 8 to a maximum of 128 characters.');
     // Convert passwordLength to Integer
     if (passwordLength < 8 || passwordLength > 128) {
-      window.alert('Uh-oh! It appears that you attempted to generate a password with ' + passwordLength + ' characters. Unfortunately, this falls outside of the allow password length parameters.');   
+      window.alert('Uh-oh! It appears that you attempted to generate a password with ' + passwordLength + ' characters. Unfortunately, this falls outside of the allowed password length parameters.');   
     }
     else {
       passwordLength = parseInt(passwordLength);

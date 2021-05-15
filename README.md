@@ -1,6 +1,8 @@
-# JavaScript Password Generator
+# SecurLock Password Generator
 ## Description
-To be added to soon!
+The pupose of this javascript app is to generate a password based off of selected parameters provided by the user. When the user completes the lists of prompts the generated password is presented in appropriate text field.
+
+![SecurLock ScreenShot](./assets/images/screenshot.png)
 
 ## User Story
 AS AN employee with access to sensitive data
