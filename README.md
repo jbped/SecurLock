@@ -1,6 +1,6 @@
 # SecurLock Password Generator
 ## Description
-The pupose of this javascript app is to generate a password based off of selected parameters provided by the user. When the user completes the lists of prompts the generated password is presented in appropriate text field.
+The pupose of [SecurLock](https://jbped.github.io/SecurLock/) (a javascript app) is to generate a password based off of selected parameters provided by the user. When the user completes the lists of prompts the generated password is presented in appropriate text field.
 
 ![SecurLock ScreenShot](./assets/images/screenshot.png)
 
