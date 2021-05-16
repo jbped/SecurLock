@@ -33,33 +33,59 @@ var generatePassword = function () {
   // Create empty choice array
   let choiceArray = [];
   let reqCharArray = [];
-  reqCharChoices = 0;
+  let reqCharChoices = 0;
   console.log('choiceArray', choiceArray);
   console.log('passwordLength',passwordLength);
   
   while (true) {
-    // Lowercase Confirmation if true merges blank choiceArray with lowercaseArray
+    // Lowercase Confirmation if true, increases reqCharChoices value by one, merges blank choiceArray with lowercaseArray, adds one random character from the lowercaseArray to the reqCharArray
     var lowerCaseConfirm = window.confirm('Would you like to include LOWERCASE letters in the password? Select "Ok" for Yes or "Cancel" for no.');
       if (lowerCaseConfirm) {
+        // add 1 to reqCharChoices
+        reqCharChoices++;
+        // Add lowercaseArray to choiceArray
         choiceArray.push(...lowercaseArray);
+        // Add a single random character from lowercaseArray to reqCharArray
+        reqCharArray.push(lowercaseArray[Math.floor(Math.random() * lowercaseArray.length)]);
+        // Console log new reqCharArray 
+        console.log('lowercaseConfirm === true',reqCharArray)
+        // Console log new choiceArray 
         console.log('choiceArray', choiceArray);
       }
-    // Uppercase Confirmation if true merges blank choiceArray with lowercaseArray
+    // UpperCase Confirmation if true, increases reqCharChoices value by one, merges blank choiceArray with uppercaseArray, adds one random character from the uppercaseArray to the reqCharArray
     var upperCaseConfirm = window.confirm('Would you like to include UPPERCASE letters in the password? Select "Ok" for Yes or "Cancel" for no.');
       if (upperCaseConfirm) {
+        // add 1 to reqCharChoices
+        reqCharChoices++;
+        // Add uppercaseArray to choiceArray
         choiceArray.push(...uppercaseArray);
+        // Add a single random character from uupercaseArray to reqCharArray
+        reqCharArray.push(uppercaseArray[Math.floor(Math.random() * uppercaseArray.length)]);
+        console.log('uppercaseConfirm === true',reqCharArray)
         console.log('choiceArray', choiceArray);
       }
-    // Number Confirmation if true merges blank choiceArray with lowercaseArray
+    // numbers Confirmation if true, increases reqCharChoices value by one, merges blank choiceArray with numbersArray, adds one random character from the numbersArray to the reqCharArray
     var numberConfirm = window.confirm('Would you like to include NUMBERS in the password? Select "Ok" for Yes or "Cancel" for no.');
       if (numberConfirm) {
+        // add 1 to reqCharChoices
+        reqCharChoices++;
+        // Add numbersArray to choiceArray
         choiceArray.push(...numbersArray);
+        // Add a single random character from numbersArray to reqCharArray
+        reqCharArray.push(numbersArray[Math.floor(Math.random() * numbersArray.length)]);
+        console.log('numberConfirm === true',reqCharArray)
         console.log('choiceArray', choiceArray);
       }
-    // Special Characters Confirmation if true merges blank choiceArray with lowercaseArray
+    // specialCharacters Confirmation if true, increases reqCharChoices value by one, merges blank choiceArray with specialCharactersArray, adds one random character from the specialCharactersArray to the reqCharArray
     var specialCharactersConfirm = window.confirm('Would you like to include SPECIAL CHARACTERS in the password? Select "Ok" for Yes or "Cancel" for no.');
       if (specialCharactersConfirm) {
+        // add 1 to reqCharChoices
+        reqCharChoices++;
+        // Add specialCharactersArray to choiceArray
         choiceArray.push(...specialCharactersArray);
+        // Add a single random character from specialCharactersArray to reqCharArray
+        reqCharArray.push(specialCharactersArray[Math.floor(Math.random() * specialCharactersArray.length)]);
+        console.log('specialCharactersConfirm === true',reqCharArray)
         console.log('choiceArray', choiceArray);
       }
     // If any of the Confirms are true it will move to the password compiler
@@ -72,33 +98,8 @@ var generatePassword = function () {
     }
   }
 
-
   var randomGen = [];
 
-  if (lowerCaseConfirm) {
-    reqCharChoices++;
-    reqCharArray.push(lowercaseArray[Math.floor(Math.random() * lowercaseArray.length)]);
-    console.log('lowercaseConfirm === true',reqCharArray)
-  }
-
-  if (upperCaseConfirm) {
-    reqCharChoices++;
-    reqCharArray.push(uppercaseArray[Math.floor(Math.random() * uppercaseArray.length)]);
-    console.log('uppercaseConfirm === true',reqCharArray)
-  }
-
-  if (numberConfirm) {
-    reqCharChoices++;
-    reqCharArray.push(numbersArray[Math.floor(Math.random() * numbersArray.length)]);
-    console.log('numberConfirm === true',reqCharArray)
-  }
-
-  if (specialCharactersConfirm) {
-    reqCharChoices++;
-    reqCharArray.push(specialCharactersArray[Math.floor(Math.random() * specialCharactersArray.length)]);
-    console.log('specialCharactersConfirm === true',reqCharArray)
-  }
-  
   for(var i = 0; i < (passwordLength - reqCharChoices); i++) {
     randomGen.push(choiceArray[Math.floor(Math.random() * choiceArray.length)]);
     console.log("randomGen pre-join with reqChar", randomGen);
@@ -107,22 +108,22 @@ var generatePassword = function () {
   randomGen.push(...reqCharArray);
   console.log("reqCharArray join with randomGen", randomGen);
   
+  // Shuffle function, passthrough array => will be shuffled
   function shuffle(arr) {
     var j, tempArr, i;
     for (i = arr.length - 1; i > 0; i--) {
         j = Math.floor(Math.random() * (i + 1));
-        tempArr = a[i];
-        a[i] = a[j];
-        a[j] = tempArr;
+        tempArr = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tempArr;
     }
-    return a;
-}
-
+    return arr;
+  }
+  // Passthrough randomGen in shuffle
   randomGen = shuffle(randomGen);
   console.log('Shuffled randomGen',randomGen)
 
-
-
+  // Return randomGen as a string
   return randomGen.join('');
 }
 // Add event listener to generate button
