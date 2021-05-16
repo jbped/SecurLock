@@ -32,6 +32,8 @@ var generatePassword = function () {
   
   // Create empty choice array
   let choiceArray = [];
+  let reqCharArray = [];
+  reqCharChoices = 0;
   console.log('choiceArray', choiceArray);
   console.log('passwordLength',passwordLength);
   
@@ -70,13 +72,58 @@ var generatePassword = function () {
     }
   }
 
-  var randomGen = '';
-  
-  for(var i = 0; i < passwordLength; i++) {
-    randomGen += choiceArray[Math.floor(Math.random() * choiceArray.length)];
-    console.log(randomGen);
+
+  var randomGen = [];
+
+  if (lowerCaseConfirm) {
+    reqCharChoices++;
+    reqCharArray.push(lowercaseArray[Math.floor(Math.random() * lowercaseArray.length)]);
+    console.log('lowercaseConfirm === true',reqCharArray)
   }
-  return randomGen;
+
+  if (upperCaseConfirm) {
+    reqCharChoices++;
+    reqCharArray.push(uppercaseArray[Math.floor(Math.random() * uppercaseArray.length)]);
+    console.log('uppercaseConfirm === true',reqCharArray)
+  }
+
+  if (numberConfirm) {
+    reqCharChoices++;
+    reqCharArray.push(numbersArray[Math.floor(Math.random() * numbersArray.length)]);
+    console.log('numberConfirm === true',reqCharArray)
+  }
+
+  if (specialCharactersConfirm) {
+    reqCharChoices++;
+    reqCharArray.push(specialCharactersArray[Math.floor(Math.random() * specialCharactersArray.length)]);
+    console.log('specialCharactersConfirm === true',reqCharArray)
+  }
+  
+  for(var i = 0; i < (passwordLength - reqCharChoices); i++) {
+    randomGen.push(choiceArray[Math.floor(Math.random() * choiceArray.length)]);
+    console.log("randomGen pre-join with reqChar", randomGen);
+  }
+
+  randomGen.push(...reqCharArray);
+  console.log("reqCharArray join with randomGen", randomGen);
+  
+  function shuffle(arr) {
+    var j, tempArr, i;
+    for (i = arr.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        tempArr = a[i];
+        a[i] = a[j];
+        a[j] = tempArr;
+    }
+    return a;
+}
+
+  randomGen = shuffle(randomGen);
+  console.log('Shuffled randomGen',randomGen)
+
+
+
+  return randomGen.join('');
 }
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
